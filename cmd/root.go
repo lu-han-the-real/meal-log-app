@@ -1,42 +1,73 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
+	"fmt"
+	"log"
 	"os"
 
+	"meal-log-app/db"
+	"meal-log-app/http_api"
+	"meal-log-app/pkg/config"
+
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
-// rootCmd represents the base command when called without any subcommands
+var cfgFile string
+
 var rootCmd = &cobra.Command{
-	Use:   "meal-log-app",
-	Short: "a small app to log your every meal",
-	Long:  `Nothing`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	Use:   "mealog",
+	Short: "A brief description of your application",
+	Long:  `A longer description that spans multiple lines and likely contains examples and usage of using your application.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		cfg, err := config.LoadConfig()
+		if err != nil {
+			fmt.Println("Error loading config:", err)
+			os.Exit(1)
+		}
+
+		queries, err := db.ConnectDB(&cfg.Database)
+		if err != nil {
+			fmt.Println("Error connecting to the database:", err)
+			os.Exit(1)
+		}
+
+		server := http_api.NewServer(queries)
+		if err := server.Serve(cfg); err != nil {
+			log.Fatalf("Could not start server: %s\n", err.Error())
+		}
+	},
 }
 
-// Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-	err := rootCmd.Execute()
-	if err != nil {
+	if err := rootCmd.Execute(); err != nil {
+		fmt.Println(err)
 		os.Exit(1)
 	}
 }
 
 func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
+	cobra.OnInitialize(initConfig)
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.mealog.yaml)")
+}
 
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.meal-log-app.yaml)")
+func initConfig() {
+	if cfgFile != "" {
+		viper.SetConfigFile(cfgFile)
+	} else {
+		viper.AddConfigPath("./pkg/config")
+		viper.AddConfigPath(".")
+		viper.SetConfigName("config")
+	}
 
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	viper.AutomaticEnv()
+
+	if err := viper.ReadInConfig(); err != nil {
+		fmt.Println("Warning: Config file not found, using defaults")
+	} else {
+		fmt.Println("Using config file:", viper.ConfigFileUsed())
+	}
 }
