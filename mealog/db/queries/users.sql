@@ -22,3 +22,11 @@ WHERE id = $3;
 -- name: DeleteUser :exec
 DELETE FROM users
 WHERE id = $1;
+-- name: GetUserByEmail :one
+SELECT id,
+    username,
+    email,
+    password_hash,
+    created_at
+FROM users
+WHERE email = $1;
