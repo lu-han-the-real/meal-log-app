@@ -22,6 +22,9 @@ func NewServer(queries *db.Queries) *Server {
 func (s *Server) Serve(cfg *config.Config) error {
 	e := echo.New()
 
+	// Use built-in logger middleware
+	e.Use(middleware.Logger())
+
 	// Configure CORS middleware
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"http://localhost:3001"}, // Allow your frontend origin

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from './service/authService'; // Adjust the path as necessary
 import { useAuth } from './service/authContext'; // Adjust the path as necessary
-import './Login.css';
+import styles from './Login.module.scss';
+// import styles from './Login.module.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -12,6 +13,7 @@ function Login() {
   const { setUser } = useAuth(); // Use context to set user information
 
   const handleSubmit = async (event: React.FormEvent) => {
+    console.log('handleSubmit');
     event.preventDefault();
     setError('');
 
@@ -26,9 +28,13 @@ function Login() {
   };
 
   return (
-    <div className="Login">
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
+    <div className={styles.Login}>
+      <div className={styles.loginHeader}>
+        <h1>MealLog</h1>
+      </div>
+      <div className={styles.loginContainer}>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.formGroup}>
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -38,7 +44,7 @@ function Login() {
             required
           />
         </div>
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -48,9 +54,10 @@ function Login() {
             required
           />
         </div>
-        {error && <p className="error">{error}</p>}
-        <button type="submit">Login</button>
-      </form>
+          {error && <p className={styles.error}>{error}</p>}
+          <button type="submit">Login</button>
+        </form>
+      </div>
     </div>
   );
 }

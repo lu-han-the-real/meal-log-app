@@ -4,6 +4,9 @@ import { useAuth } from './service/authContext'; // Adjust the path as necessary
 const Profile: React.FC = () => {
   const { user } = useAuth();
 
+  console.log('profile:user', user);
+  console.log('profile:userName', user?.Username);
+  console.log('profile:userEmail', user?.Email);
   if (!user) {
     return <div>Loading...</div>;
   }
@@ -11,8 +14,8 @@ const Profile: React.FC = () => {
   return (
     <div className="profile-container">
       <h2>User Profile</h2>
-      <p><strong>Username:</strong> {user.username}</p>
-      <p><strong>Email:</strong> {user.email}</p>
+      <p><strong>Username:</strong> {user.Username}</p>
+      <p><strong>Email:</strong> {user.Email}</p>
     </div>
   );
 };

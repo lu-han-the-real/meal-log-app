@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-interface User {
+export interface User {
   id: string;
-  username: string;
-  email: string;
+  Username: string;
+  Email: string;
 }
 
 interface AuthContextType {
