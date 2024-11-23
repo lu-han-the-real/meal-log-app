@@ -1,23 +1,21 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { useAuth } from './service/authContext'; // Adjust the path as necessary
+import { Routes, Route } from 'react-router-dom';
 import Login from './Login';
+import SignUp from './SignUp';
 import Profile from './Profile';
 import './App.css';
+import { useAuth } from './service/authContext';
 
 function App() {
   const { user } = useAuth();
 
   console.log('User state:', user);
   return (
-    // <Router>
-      <Routes>
-        <Route path="/" element={!user ? <Login /> : <Navigate to="/profile" />} />
-        <Route path="/profile" element={user ? <Profile /> : <Navigate to="/" />} />
-        {/* <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} /> */}
-        {/* Add other routes here */}
-      </Routes>
-    // </Router>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/profile" element={<Profile />} />
+    </Routes>
   );
 }
 
