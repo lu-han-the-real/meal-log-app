@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from './service/authContext'; // Adjust the path as necessary
 
 const Profile: React.FC = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
-  console.log('profile:user', user);
-  console.log('profile:userName', user?.Username);
-  console.log('profile:userEmail', user?.Email);
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
+
   if (!user) {
     return <div>Loading...</div>;
   }

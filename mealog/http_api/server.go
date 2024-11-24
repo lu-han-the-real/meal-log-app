@@ -35,6 +35,7 @@ func (s *Server) Serve(cfg *config.Config) error {
 	e.POST("/users", s.CreateUser)
 	e.GET("/users/:id", s.getUserHandler)
 	e.POST("/login", s.Login)
+	e.POST("/signup", s.SignUp)
 
 	port := cfg.Server.Port
 	if err := e.Start(fmt.Sprintf(":%d", port)); err != nil {
