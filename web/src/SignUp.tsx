@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signUp } from './service/authService'; // Adjust the path as necessary
 import { useAuth } from './service/authContext'; // Adjust the path as necessary
-import styles from './SignUp.module.scss';
+import styles from './AuthForm.module.scss';
 
 function SignUp() {
   const [email, setEmail] = useState('');
@@ -19,7 +19,7 @@ function SignUp() {
     try {
       const { user } = await signUp(username, email, password);
       setUser(user);
-      navigate('/login');
+      navigate('/profile');
     } catch (error) {
       console.error('Error during sign up:', error);
       setError('Failed to sign up. Please try again.');
@@ -27,11 +27,11 @@ function SignUp() {
   };
 
   return (
-    <div className={styles.SignUp}>
-      <div className={styles.signUpHeader}>
+    <div className={styles.authForm}>
+      <div className={styles.formHeader}>
         <h1>Sign Up for MealLog</h1>
       </div>
-      <div className={styles.signUpContainer}>
+      <div className={styles.formContainer}>
         <form onSubmit={handleSubmit}>
           <div className={styles.formGroup}>
             <label htmlFor="username">Username:</label>
@@ -66,6 +66,9 @@ function SignUp() {
           {error && <p className={styles.error}>{error}</p>}
           <button type="submit">Sign Up</button>
         </form>
+        <p className={styles.signUpPrompt}>
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
       </div>
     </div>
   );
