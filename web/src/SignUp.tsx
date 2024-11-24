@@ -19,7 +19,7 @@ function SignUp() {
     try {
       const { user } = await signUp(username, email, password);
       setUser(user);
-      navigate('/profile');
+      navigate('/login');
     } catch (error) {
       console.error('Error during sign up:', error);
       setError('Failed to sign up. Please try again.');
