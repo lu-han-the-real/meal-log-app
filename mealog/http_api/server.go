@@ -27,7 +27,7 @@ func (s *Server) Serve(cfg *config.Config) error {
 
 	// Configure CORS middleware
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"http://localhost:3001"}, // Allow your frontend origin
+		AllowOrigins: []string{"http://localhost:3000"}, // Allow your frontend origin
 		AllowMethods: []string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete, http.MethodOptions},
 	}))
 
