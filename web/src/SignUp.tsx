@@ -1,28 +1,25 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { signUp } from './service/authService'; // Adjust the path as necessary
-import { useAuth } from './service/authContext'; // Adjust the path as necessary
+import { useNavigate, Link } from 'react-router-dom';
+import { registerUser } from './service/authService';
 import styles from './AuthForm.module.scss';
 
 function SignUp() {
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { setUser } = useAuth();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setError('');
 
     try {
-      const { user } = await signUp(username, email, password);
-      setUser(user);
-      navigate('/profile');
+      await registerUser(username, email, password);
+      navigate('/login');
     } catch (error) {
-      console.error('Error during sign up:', error);
-      setError('Failed to sign up. Please try again.');
+      console.error('Error during signup:', error);
+      setError('Error creating account');
     }
   };
 
