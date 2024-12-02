@@ -5,9 +5,7 @@ html, body, #root {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #000000;
@@ -70,5 +68,168 @@ body {
 
 .App-link {
   color: #61dafb;
+}
+
+h1, h2, h3 {
+  font-weight: 700; /* Bold */
+}
+
+.subtitle {
+  font-weight: 500; /* Medium */
+}
+
+.body-text {
+  font-weight: 400; /* Regular */
+}
+
+.SignUp {
+  background-color: #333;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: white;
+  width: 100%;
+  max-width: 500px;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.signup-form input {
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background-color: #222;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+}
+
+.signup-form input:focus {
+  outline: none;
+  border-color: #61dafb;
+}
+
+.signup-form button {
+  padding: 12px 24px;
+  background-color: #61dafb;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.signup-form button:hover {
+  background-color: #4fa8d1;
+}
+
+.signup-error {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+/* Shared Authentication Styles */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.auth-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-header h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4fa8d1;
+  box-shadow: 0 0 0 2px rgba(79, 168, 209, 0.2);
+}
+
+.auth-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4fa8d1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.auth-button:hover {
+  background-color: #3d8bb0;
+}
+
+.auth-error {
+  color: #dc3545;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.auth-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.auth-link a {
+  color: #4fa8d1;
+  text-decoration: none;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
 }
 
